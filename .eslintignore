@@ -13,3 +13,4 @@ src/stories
 tailwind.config.js
 lingui.config.js
 src/locales
+wdyr.js

@@ -32,7 +32,7 @@ const webpackBaseConfig = {
         test: /\.(ts|tsx)$/,
         use: [{
           /** 默认使用swc-loader */
-            loader: argv.loader === 'babel' ? 'babel-loader' : 'swc-loader',
+          loader: argv.loader === 'babel' ? 'babel-loader' : 'swc-loader',
         }],
       },
       {
