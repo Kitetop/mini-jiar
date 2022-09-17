@@ -6,7 +6,8 @@
   "scripts": {
     "client:dev": "scripty",
     "client:analyze": "scripty",
-    "client:build": "scripty"
+    "client:build": "scripty",
+    "mock-server": "json-server .mock/db.json --watch"
   },
   "author": "",
   "license": "ISC",
@@ -45,6 +46,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "html-webpack-plugin": "^5.5.0",
     "husky": ">=7",
+    "json-server": "^0.17.0",
     "lint-staged": ">=10",
     "mini-css-extract-plugin": "^2.6.1",
     "node-notifier": "^10.0.1",
