@@ -3,6 +3,7 @@ import { ProjectList } from './ProjectList';
 
 const App = (): JSX.Element => {
   const [count, setCount] = useState(0);
+  console.log('ssss');
 
   return (
     <>

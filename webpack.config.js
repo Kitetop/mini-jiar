@@ -15,7 +15,7 @@ const webpackBaseConfig = {
     main: resolve('src/web/index.tsx'),
   },
   output: {
-    path: resolve(process.cwd(), 'dist'),
+    path: resolve('dist'),
   },
   cache: {
     type: 'filesystem',
@@ -70,6 +70,7 @@ const webpackBaseConfig = {
   },
   resolve: {
     // fallback: { url: false, os: false },
+    mainFiles: ['index'],
     alias: {
       '@components': resolve('src/web/components'),
       '@hooks': resolve('src/web/hooks'),
@@ -82,6 +83,7 @@ const webpackBaseConfig = {
       '@lib': resolve('src/web/lib'),
       '@constants': resolve('src/web/constants'),
     },
+
     extensions: ['.js', '.ts', '.tsx', 'jsx', '.css'],
   },
   plugins: [
@@ -93,7 +95,9 @@ const webpackBaseConfig = {
     }),
     new CleanWebpackPlugin(),
     new WebpackBar(),
-    new Dotenv(),
+    new Dotenv({
+      path: resolve(`config/.env.${_mode}`)
+    }),
   ],
 };
 

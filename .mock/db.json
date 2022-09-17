@@ -1,5 +1,4 @@
 {
-  "users": [
-    {"username":"Kitetop","password":"123456"}
-  ]
+  "users": [{ "username": "Kitetop", "password": "123456" }],
+  "projects": []
 }

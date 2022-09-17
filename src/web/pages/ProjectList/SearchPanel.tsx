@@ -22,7 +22,9 @@ export const SearchPanel = () => {
         ></input>
         <select value={query.id} onChange={evt => setQuery({ ...query, id: evt.target.name })}>
           {users.map(user => (
-            <option value={user.id}>{user.username}</option>
+            <option key={user.id} value={user.id}>
+              {user.username}
+            </option>
           ))}
         </select>
       </div>
