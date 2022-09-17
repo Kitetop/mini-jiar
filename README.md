@@ -25,3 +25,9 @@ css-minimizer-webpack-plugin | 优化并缩小css代码
  @babel/plugin-transform-proto-to-assign | 对__proto__属性赋值使用引用
  @babel/preset-react | 对react语法进行转换
  @babel/preset-typescript | 对ts语法进行转换
+ 
+ ---
+ > 使用husky
+ ```
+ npx mrm lint-staged
+ ```
