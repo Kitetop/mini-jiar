@@ -72,16 +72,8 @@ const webpackBaseConfig = {
     // fallback: { url: false, os: false },
     mainFiles: ['index'],
     alias: {
-      '@components': resolve('src/web/components'),
-      '@hooks': resolve('src/web/hooks'),
+      '@web': resolve('src/web'),
       '@pages': resolve('src/web/pages'),
-      '@layouts': resolve('src/web/layouts'),
-      '@assets': resolve('src/web/assets'),
-      '@states': resolve('src/web/states'),
-      '@service': resolve('src/web/service'),
-      '@utils': resolve('src/web/utils'),
-      '@lib': resolve('src/web/lib'),
-      '@constants': resolve('src/web/constants'),
     },
 
     extensions: ['.js', '.ts', '.tsx', 'jsx', '.css'],

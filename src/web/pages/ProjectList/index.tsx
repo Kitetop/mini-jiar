@@ -1,5 +1,5 @@
 import qs from 'qs';
-import { getApiUrl } from '@lib/index';
+import { getApiUrl } from '@web/lib';
 import { useEffect, useState } from 'react';
 import { IUserInfo, XProjectAttr } from 'types';
 import { List } from './List';
