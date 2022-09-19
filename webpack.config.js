@@ -72,6 +72,7 @@ const webpackBaseConfig = {
     // fallback: { url: false, os: false },
     mainFiles: ['index'],
     alias: {
+      'core': resolve('src/core'),
       '@web': resolve('src/web'),
       '@pages': resolve('src/web/pages'),
     },

@@ -1,26 +1,32 @@
-import { useState } from 'react';
+import { memo } from 'react';
 import type { IUserInfo } from 'types';
+import { XSearchProjectListType } from './index.type';
 
-export const SearchPanel = () => {
-  const [query, setQuery] = useState({
-    name: '',
-    id: ''
-  });
-  const [users, setUsers] = useState<IUserInfo[]>([]);
+interface ISearchPanelPropsType {
+  users: IUserInfo[];
+  query: XSearchProjectListType;
+  changeSearchQuery: (v: XSearchProjectListType) => void;
+}
+
+const SearchPanel = ({ users, query, changeSearchQuery }: ISearchPanelPropsType) => {
   return (
     <form action="">
       <div>
         <input
           type="text"
-          value={query.name}
-          onChange={evt =>
-            setQuery({
+          value={query.projectName}
+          onChange={evt => {
+            changeSearchQuery({
               ...query,
-              name: evt.target.name
-            })
-          }
+              projectName: evt.target.value
+            });
+          }}
         ></input>
-        <select value={query.id} onChange={evt => setQuery({ ...query, id: evt.target.name })}>
+        <select
+          value={query.userId}
+          onChange={evt => changeSearchQuery({ ...query, userId: evt.target.value })}
+        >
+          <option value="">负责人</option>
           {users.map(user => (
             <option key={user.id} value={user.id}>
               {user.username}
@@ -31,3 +37,5 @@ export const SearchPanel = () => {
     </form>
   );
 };
+
+export default memo(SearchPanel);
