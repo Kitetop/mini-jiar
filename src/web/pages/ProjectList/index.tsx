@@ -1,5 +1,5 @@
 import { getApiUrl } from '@web/lib';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import type { IUserInfo, XProjectAttr } from 'types';
 import { List } from './List';
 import SearchPanel from './SearchPanel';
@@ -8,8 +8,25 @@ import { XSearchProjectListType } from './index.type';
 
 const api = getApiUrl();
 
+/**
+ * 获得请求参数
+ * @param params
+ * @returns
+ */
+function getSearchProjectParams(params: XSearchProjectListType) {
+  return stringifyParams(
+    omitEmptyObjectValue(
+      {
+        projectName: params.projectName,
+        belongPerson: params.userId
+      },
+      value => isEmpty(value)
+    )
+  );
+}
+
 export const ProjectList = () => {
-  const [query, setQuery] = useState<XSearchProjectListType>({
+  const query = useRef<XSearchProjectListType>({
     userId: '',
     projectName: ''
   });
@@ -22,28 +39,26 @@ export const ProjectList = () => {
    * 变更查找值的函数
    */
   const changeSearchQuery = useCallback((v: XSearchProjectListType) => {
-    setQuery(v);
+    query.current = v;
+    const params = getSearchProjectParams(v);
+    fetch(`${api}/projects?${params}`).then(async response => {
+      if (response.ok) {
+        setProjectList(await response.json());
+      }
+    });
   }, []);
 
   /**
    * 请求项目列表
    */
   useEffect(() => {
-    const params = stringifyParams(
-      omitEmptyObjectValue(
-        {
-          projectName: query.projectName,
-          belongPerson: query.userId
-        },
-        value => isEmpty(value)
-      )
-    );
+    const params = getSearchProjectParams(query.current);
     fetch(`${api}/projects?${params}`).then(async response => {
       if (response.ok) {
         setProjectList(await response.json());
       }
     });
-  }, [query]);
+  }, []);
 
   /**
    * 请求用户列表
@@ -60,7 +75,7 @@ export const ProjectList = () => {
     <>
       <SearchPanel
         users={userList}
-        query={query}
+        query={query.current}
         changeSearchQuery={changeSearchQuery}
       ></SearchPanel>
       <List users={userList} projects={projectList}></List>
