@@ -1,11 +1,12 @@
 import { getApiUrl } from '@web/lib';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import type { IUserInfo, XProjectAttr } from 'types';
 import { List } from './List';
 import SearchPanel from './SearchPanel';
 import { isEmpty, omitEmptyObjectValue, stringifyParams } from 'core';
-import { XSearchProjectListType } from './index.type';
 import { useMount } from 'hooks';
+
+import type { IUserInfo, XProjectAttr } from 'types';
+import type { XSearchProjectListType } from './index.type';
 
 const api = getApiUrl();
 

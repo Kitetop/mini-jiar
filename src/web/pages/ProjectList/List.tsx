@@ -1,4 +1,4 @@
-import { IUserInfo, XProjectAttr } from 'types';
+import type { IUserInfo, XProjectAttr } from 'types';
 
 interface IListPropsType {
   users: IUserInfo[];

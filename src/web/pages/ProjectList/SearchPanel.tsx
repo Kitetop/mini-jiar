@@ -1,7 +1,8 @@
 import { useDebounceFn } from 'hooks';
 import { memo, useState } from 'react';
+
 import type { IUserInfo } from 'types';
-import { XSearchProjectListType } from './index.type';
+import type { XSearchProjectListType } from './index.type';
 
 interface ISearchPanelPropsType {
   users: IUserInfo[];

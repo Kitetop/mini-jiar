@@ -3,11 +3,14 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { useUnMount } from './lifeCycle';
 import type { IDebounceOptions, noop } from './index.type';
 
-export function useDebounceFn<T extends noop<Parameters<T>>>(fn: T, options?: IDebounceOptions) {
+export function useDebounceFn<T extends noop<Parameters<T>>>(
+  fn: T,
+  options: IDebounceOptions = {}
+) {
   // 缓存一下fn
   const fnRef = useRef(fn);
 
-  const debounced = useMemo(() => debounce<T>(fnRef.current, options?.wait ?? 1000, options), []);
+  const debounced = useMemo(() => debounce<T>(fnRef.current, options.wait ?? 1000, options), []);
   /**
    * unMount之后cancel掉
    */
@@ -22,7 +25,7 @@ export function useDebounceFn<T extends noop<Parameters<T>>>(fn: T, options?: ID
 }
 
 /**
- * 对于频繁变化的value进行防抖，直接一定时间间隔后的value才会被更新
+ * 对于频繁变化的value进行防抖，一定时间间隔后的value才会被更新
  * @param value
  * @param options
  * @returns
