@@ -16,6 +16,7 @@ const webpackBaseConfig = {
   },
   output: {
     path: resolve('dist'),
+    filename: '[name].js',
   },
   cache: {
     type: 'filesystem',
@@ -30,6 +31,7 @@ const webpackBaseConfig = {
     rules: [
       {
         test: /\.(ts|tsx)$/,
+        exclude: /node_modules/,
         use: [{
           /** 默认使用swc-loader */
           loader: argv.loader === 'babel' ? 'babel-loader' : 'swc-loader',
@@ -62,17 +64,18 @@ const webpackBaseConfig = {
     runtimeChunk: {
       name: 'runtime',
     },
-    splitChunks: {
-      chunks: 'all',
-      maxAsyncRequests: 3,
-      cacheGroups: {},
-    },
+    // splitChunks: {
+    //   chunks: 'all',
+    //   maxAsyncRequests: 3,
+    //   cacheGroups: {},
+    // },
   },
   resolve: {
     // fallback: { url: false, os: false },
     mainFiles: ['index'],
     alias: {
       'core': resolve('src/core'),
+      'hooks': resolve('src/hooks'),
       '@web': resolve('src/web'),
       '@pages': resolve('src/web/pages'),
     },
@@ -95,4 +98,5 @@ const webpackBaseConfig = {
 };
 
 if (argv.analyze) webpackBaseConfig.plugins.concat([new BundleAnalyzerPlugin()])
+
 module.exports = merge.default(webpackBaseConfig, _mergeConfig);

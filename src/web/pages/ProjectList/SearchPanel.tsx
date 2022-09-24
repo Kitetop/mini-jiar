@@ -1,30 +1,46 @@
-import { memo } from 'react';
+import { useDebounceFn } from 'hooks';
+import { memo, useState } from 'react';
 import type { IUserInfo } from 'types';
 import { XSearchProjectListType } from './index.type';
 
 interface ISearchPanelPropsType {
   users: IUserInfo[];
-  query: XSearchProjectListType;
   changeSearchQuery: (v: XSearchProjectListType) => void;
 }
 
-const SearchPanel = ({ users, query, changeSearchQuery }: ISearchPanelPropsType) => {
+const SearchPanel = ({ users, changeSearchQuery }: ISearchPanelPropsType) => {
+  const [searchQuery, updateSearchQuery] = useState<XSearchProjectListType>({
+    userId: '',
+    projectName: ''
+  });
+
+  const { run } = useDebounceFn(changeSearchQuery);
+
   return (
     <form action="">
       <div>
         <input
           type="text"
-          value={query.projectName}
+          value={searchQuery.projectName}
           onChange={evt => {
-            changeSearchQuery({
-              ...query,
+            const params = {
+              ...searchQuery,
               projectName: evt.target.value
-            });
+            };
+            updateSearchQuery(params);
+            run(params);
           }}
         ></input>
         <select
-          value={query.userId}
-          onChange={evt => changeSearchQuery({ ...query, userId: evt.target.value })}
+          value={searchQuery.userId}
+          onChange={evt => {
+            const params = {
+              ...searchQuery,
+              userId: evt.target.value
+            };
+            updateSearchQuery(params);
+            changeSearchQuery(params);
+          }}
         >
           <option value="">负责人</option>
           {users.map(user => (

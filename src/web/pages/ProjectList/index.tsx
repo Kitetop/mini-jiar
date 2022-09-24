@@ -5,6 +5,7 @@ import { List } from './List';
 import SearchPanel from './SearchPanel';
 import { isEmpty, omitEmptyObjectValue, stringifyParams } from 'core';
 import { XSearchProjectListType } from './index.type';
+import { useDebounceFn, useDebounce } from 'hooks';
 
 const api = getApiUrl();
 
@@ -25,8 +26,12 @@ function getSearchProjectParams(params: XSearchProjectListType) {
   );
 }
 
+function requestProjectLists(v: XSearchProjectListType) {
+  return fetch(`${api}/projects?${getSearchProjectParams(v)}`);
+}
+
 export const ProjectList = () => {
-  const query = useRef<XSearchProjectListType>({
+  const searchQuery = useRef<XSearchProjectListType>({
     userId: '',
     projectName: ''
   });
@@ -39,9 +44,7 @@ export const ProjectList = () => {
    * 变更查找值的函数
    */
   const changeSearchQuery = useCallback((v: XSearchProjectListType) => {
-    query.current = v;
-    const params = getSearchProjectParams(v);
-    fetch(`${api}/projects?${params}`).then(async response => {
+    requestProjectLists(v).then(async response => {
       if (response.ok) {
         setProjectList(await response.json());
       }
@@ -52,8 +55,7 @@ export const ProjectList = () => {
    * 请求项目列表
    */
   useEffect(() => {
-    const params = getSearchProjectParams(query.current);
-    fetch(`${api}/projects?${params}`).then(async response => {
+    requestProjectLists(searchQuery.current).then(async response => {
       if (response.ok) {
         setProjectList(await response.json());
       }
@@ -73,11 +75,7 @@ export const ProjectList = () => {
 
   return (
     <>
-      <SearchPanel
-        users={userList}
-        query={query.current}
-        changeSearchQuery={changeSearchQuery}
-      ></SearchPanel>
+      <SearchPanel users={userList} changeSearchQuery={changeSearchQuery}></SearchPanel>
       <List users={userList} projects={projectList}></List>
     </>
   );
