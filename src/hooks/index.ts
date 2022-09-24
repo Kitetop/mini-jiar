@@ -1,2 +1,2 @@
-export * from './useDebounceFn';
-export * from './useDebounce';
+export * from './debounce';
+export * from './lifeCycle';

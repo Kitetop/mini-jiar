@@ -5,7 +5,7 @@ import { List } from './List';
 import SearchPanel from './SearchPanel';
 import { isEmpty, omitEmptyObjectValue, stringifyParams } from 'core';
 import { XSearchProjectListType } from './index.type';
-import { useDebounceFn, useDebounce } from 'hooks';
+import { useMount } from 'hooks';
 
 const api = getApiUrl();
 
@@ -26,6 +26,11 @@ function getSearchProjectParams(params: XSearchProjectListType) {
   );
 }
 
+/**
+ * 根据条件查询符合条件的 projectList
+ * @param v
+ * @returns
+ */
 function requestProjectLists(v: XSearchProjectListType) {
   return fetch(`${api}/projects?${getSearchProjectParams(v)}`);
 }
@@ -54,13 +59,13 @@ export const ProjectList = () => {
   /**
    * 请求项目列表
    */
-  useEffect(() => {
+  useMount(() => {
     requestProjectLists(searchQuery.current).then(async response => {
       if (response.ok) {
         setProjectList(await response.json());
       }
     });
-  }, []);
+  });
 
   /**
    * 请求用户列表
