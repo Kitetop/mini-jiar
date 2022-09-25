@@ -7,7 +7,7 @@
     "client:dev": "scripty",
     "client:analyze": "scripty",
     "client:build": "scripty",
-    "mock-server": "json-server .mock/db.json --watch",
+    "mock-server": "json-server .mock/db.json --watch --middlewares .mock/middleware.js",
     "test": "jest"
   },
   "author": "",
