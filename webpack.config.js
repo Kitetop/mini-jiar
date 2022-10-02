@@ -75,6 +75,7 @@ const webpackBaseConfig = {
     mainFiles: ['index'],
     alias: {
       'core': resolve('src/core'),
+      'server': resolve('src/server'),
       'hooks': resolve('src/hooks'),
       '@web': resolve('src/web'),
       '@pages': resolve('src/web/pages'),

@@ -1,11 +1,11 @@
 import { useDebounceFn } from 'hooks';
 import { memo, useState } from 'react';
 
-import type { IUserInfo } from 'types';
+import type { XUserInfoAttr } from 'types';
 import type { XSearchProjectListType } from './index.type';
 
 interface ISearchPanelPropsType {
-  users: IUserInfo[];
+  users: XUserInfoAttr[];
   changeSearchQuery: (v: XSearchProjectListType) => void;
 }
 

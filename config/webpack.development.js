@@ -15,7 +15,7 @@ module.exports = {
       '/api': 'http://localhost:' + prot,
     },
     static: {
-      directory: join(__dirname, '../dist'),
+      directory: join(__dirname, '../public'),
     },
     hot: true,
     port: prot,

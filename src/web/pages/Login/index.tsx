@@ -1,11 +1,11 @@
 import { getApiUrl } from '@web/lib';
 import { FormEvent } from 'react';
-import type { IUserInfo } from 'types';
+import type { XUserInfoAttr } from 'types';
 
 const api = getApiUrl();
 
-function login(params: Omit<IUserInfo, 'id'>) {
-  return fetch(`${api}/login`, {
+function login(params: Omit<XUserInfoAttr, 'id'>) {
+  return fetch('login', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'

@@ -1,7 +1,7 @@
-import type { IUserInfo, XProjectAttr } from 'types';
+import type { XUserInfoAttr, XProjectAttr } from 'types';
 
 interface IListPropsType {
-  users: IUserInfo[];
+  users: XUserInfoAttr[];
   projects: XProjectAttr[];
 }
 export const List = ({ users, projects }: IListPropsType) => {

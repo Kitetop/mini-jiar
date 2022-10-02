@@ -5,7 +5,7 @@ import SearchPanel from './SearchPanel';
 import { isEmpty, omitEmptyObjectValue, stringifyParams } from 'core';
 import { useMount } from 'hooks';
 
-import type { IUserInfo, XProjectAttr } from 'types';
+import type { XUserInfoAttr, XProjectAttr } from 'types';
 import type { XSearchProjectListType } from './index.type';
 
 const api = getApiUrl();
@@ -44,7 +44,7 @@ export const ProjectList = () => {
 
   const [projectList, setProjectList] = useState<XProjectAttr[]>([]);
 
-  const [userList, setUserList] = useState<IUserInfo[]>([]);
+  const [userList, setUserList] = useState<XUserInfoAttr[]>([]);
 
   /**
    * 变更查找值的函数
