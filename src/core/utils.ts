@@ -1,4 +1,4 @@
-import { isEmpty as _isEmpty, isNil, isObject, isString, omitBy } from 'lodash-es';
+import { isEmpty as _isEmpty, isNil, isObject, isString, omitBy, cloneDeep } from 'lodash-es';
 
 /**
  * 排除callback返回值为true的值
@@ -25,3 +25,5 @@ export function isEmpty(value: unknown) {
 
   return isNil(value);
 }
+
+export { cloneDeep, isString, isObject };

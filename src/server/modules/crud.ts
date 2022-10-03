@@ -1,9 +1,11 @@
-export class AbstractCrud<T extends Record<string, any>> {
+export type IAbstractModel<T> = { [K in keyof T]: T[K] };
+
+export class AbstractCrud<T extends { [key: string | number]: unknown }> {
   protected model: T[];
 
   protected primary = 'id';
 
-  protected static instance: AbstractCrud<Record<string, unknown>>;
+  protected static instance: AbstractCrud<{ [key: string | number]: unknown }>;
 
   protected constructor(model: T[], primary?: string) {
     // 浅拷贝一下 避免污染全局常量
@@ -11,9 +13,12 @@ export class AbstractCrud<T extends Record<string, any>> {
     primary && (this.primary = primary);
   }
 
-  public static getInstance<S extends Record<string, any>>(model: S[], primary?: string) {
+  public static getInstance<T extends { [key: string | number]: unknown }>(
+    model: T[],
+    primary?: string
+  ) {
     if (!this.instance) {
-      this.instance = new AbstractCrud<S>(model, primary);
+      this.instance = new AbstractCrud<T>(model, primary);
     }
     return this.instance;
   }
@@ -31,8 +36,28 @@ export class AbstractCrud<T extends Record<string, any>> {
     return result[0];
   }
 
-  public findByEntity(): T[] {
-    return [];
+  /**
+   * 根据model数据格式来查找数据
+   * @param model 如果值的末尾存在%，则启用模糊搜索
+   * @returns
+   */
+  public find(model: T): T[] {
+    const keys = Object.keys(model);
+
+    return this.model.filter(m => {
+      return keys.every(k => {
+        // 新构建model中的值
+        const v = model[k];
+        // model中记录的原始值
+        const origin = m[k];
+
+        if (typeof v === 'string' && typeof origin === 'string' && v.charAt(v.length - 1) === '%') {
+          return origin.includes(v.slice(0, v.length - 1));
+        }
+
+        return origin === model[k];
+      });
+    });
   }
 
   /**
