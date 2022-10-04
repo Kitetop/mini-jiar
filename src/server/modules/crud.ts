@@ -5,22 +5,10 @@ export class AbstractCrud<T extends { [key: string | number]: unknown }> {
 
   protected primary = 'id';
 
-  protected static instance: AbstractCrud<{ [key: string | number]: unknown }>;
-
   protected constructor(model: T[], primary?: string) {
     // 浅拷贝一下 避免污染全局常量
     this.model = [...model];
     primary && (this.primary = primary);
-  }
-
-  public static getInstance<T extends { [key: string | number]: unknown }>(
-    model: T[],
-    primary?: string
-  ) {
-    if (!this.instance) {
-      this.instance = new AbstractCrud<T>(model, primary);
-    }
-    return this.instance;
   }
 
   /**
@@ -41,7 +29,7 @@ export class AbstractCrud<T extends { [key: string | number]: unknown }> {
    * @param model 如果值的末尾存在%，则启用模糊搜索
    * @returns
    */
-  public find(model: T): T[] {
+  public find(model: Partial<T>): T[] {
     const keys = Object.keys(model);
 
     return this.model.filter(m => {

@@ -6,9 +6,9 @@ import { userModle } from './model';
 export function login() {
   return rest.post('login', async (req, res, ctx) => {
     const { username, password } = await req.json<Pick<XUserInfoAttr, 'username' | 'password'>>();
-    const user = userModle.find({ username, password });
+    const token = userModle.getToken(username, password);
 
-    if (isEmpty(user)) {
+    if (isEmpty(token)) {
       return res(
         ctx.status(404),
         ctx.json({
@@ -17,6 +17,6 @@ export function login() {
       );
     }
 
-    return res(ctx.status(200), ctx.json({ token: '1111111' }));
+    return res(ctx.status(200), ctx.json({ token }));
   });
 }
