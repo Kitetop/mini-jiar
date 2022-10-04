@@ -1,10 +1,9 @@
 // src/mocks/handlers.js
 import { rest } from 'msw';
-import { login } from './modules/users/users';
+import { userHandlers } from './modules';
 
 export const handlers = [
-  login(),
-
+  ...userHandlers,
   rest.get('/user', (req, res, ctx) => {
     // Check if the user is authenticated in this session
     const isAuthenticated = sessionStorage.getItem('is-authenticated');
