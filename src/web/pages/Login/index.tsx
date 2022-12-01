@@ -1,8 +1,5 @@
-import { getApiUrl } from '@web/lib';
 import { FormEvent } from 'react';
 import type { XUserInfoAttr } from 'types';
-
-const api = getApiUrl();
 
 function login(params: Omit<XUserInfoAttr, 'id'>) {
   return fetch('login', {

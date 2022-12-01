@@ -7,7 +7,7 @@ export const users: XUserInfoAttr[] = [
   { username: 'Null', password: '2', id: '10001' }
 ];
 
-class UserModle extends AbstractCrud<IAbstractModel<XUserInfoAttr>> {
+class UserModle extends AbstractCrud<IAbstractModel<Partial<XUserInfoAttr>>> {
   protected static instance: UserModle;
 
   protected constructor(model: XUserInfoAttr[], primary?: string) {
@@ -28,7 +28,7 @@ class UserModle extends AbstractCrud<IAbstractModel<XUserInfoAttr>> {
    * @returns
    */
   public getToken(username: string, password: string) {
-    const user = this.searchUser(username, password);
+    const user = this.searchUser({ username, password });
     if (user) {
       return `${username}_${password}`;
     }
@@ -40,11 +40,20 @@ class UserModle extends AbstractCrud<IAbstractModel<XUserInfoAttr>> {
    * @param username
    * @param password
    */
-  public searchUser(username: string, password: string) {
-    const user = this.find({ username, password });
-    if (!isEmpty(users)) return user[0];
+  public searchUser(user: Partial<XUserInfoAttr>) {
+    const result = this.find(user);
+    if (!isEmpty(result)) return result;
     return null;
+  }
+
+  /**
+   * 生成自增为1的id
+   * @returns
+   */
+  public generateId() {
+    const lastId = +(this.model[this.model.length - 1].id || 0);
+    return `${lastId + 1}`;
   }
 }
 
-export const userModle = UserModle.getInstance(users);
+export const getUserModle = () => UserModle.getInstance(users);
