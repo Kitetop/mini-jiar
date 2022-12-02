@@ -5,8 +5,7 @@
       "baseUrl": "./",
       "outDir": "./bin",
       "declaration": true,
-      "declarationDir": "./typings",
-      "noEmit": false,
+      "declarationDir": "./typings"
   },
   "include": ["./src", "./tests"],
 }

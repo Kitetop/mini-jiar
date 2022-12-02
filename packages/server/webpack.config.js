@@ -8,6 +8,7 @@ module.exports = merge.default(commonConfig, {
   },
   resolve: {
     mainFiles: ['index'],
+    alias: {},
     extensions: ['.js', '.ts', '.tsx', 'jsx', '.css'],
   },
   output: {
