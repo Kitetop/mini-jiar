@@ -1,6 +1,6 @@
-import { isEmpty } from 'core';
+import { isEmpty } from '../function';
 import { rest } from 'msw';
-import { XUserInfoAttr } from 'types';
+import { XUserInfoAttr } from '../type';
 import { getUserModle } from './model';
 
 /**
