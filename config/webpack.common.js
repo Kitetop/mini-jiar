@@ -1,6 +1,5 @@
 const { resolve } = require('path');
 const WebpackBar = require('webpackbar');
-const Dotenv = require('dotenv-webpack');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
@@ -9,13 +8,6 @@ const _mode = argv.mode || 'development';
 const _modeflag = _mode === 'production' ? true : false;
 
 module.exports = {
-  entry: {
-    main: resolve('src/web/index.tsx'),
-  },
-  output: {
-    path: resolve('dist'),
-    filename: '[name].js',
-  },
   cache: {
     type: 'filesystem',
     // cacheDirectory: resolve(__dirname, '.temp'),
@@ -68,19 +60,6 @@ module.exports = {
     //   cacheGroups: {},
     // },
   },
-  resolve: {
-    // fallback: { url: false, os: false },
-    mainFiles: ['index'],
-    alias: {
-      'core': resolve('src/core'),
-      'server': resolve('src/server'),
-      'hooks': resolve('src/hooks'),
-      '@web': resolve('src/web'),
-      '@pages': resolve('src/web/pages'),
-    },
-
-    extensions: ['.js', '.ts', '.tsx', 'jsx', '.css'],
-  },
   plugins: [
     // new NodePolyfillPlugin(),
     new MiniCssExtractPlugin({
@@ -90,8 +69,5 @@ module.exports = {
     }),
     new CleanWebpackPlugin(),
     new WebpackBar(),
-    new Dotenv({
-      path: resolve(`config/.env.${_mode}`)
-    }),
   ],
 };
