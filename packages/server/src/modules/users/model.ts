@@ -1,5 +1,5 @@
 import { isEmpty } from '../function';
-import { XUserInfoAttr } from '../type';
+import { XUserInfoAttr } from '../index.type';
 import { AbstractCrud, IAbstractModel } from '../crud';
 
 export const users: XUserInfoAttr[] = [

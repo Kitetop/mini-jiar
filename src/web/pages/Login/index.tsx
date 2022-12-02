@@ -1,5 +1,5 @@
 import { FormEvent } from 'react';
-import type { XUserInfoAttr } from 'types';
+import type { XUserInfoAttr } from '@kite/jira-server';
 
 function login(params: Omit<XUserInfoAttr, 'id'>) {
   return fetch('login', {

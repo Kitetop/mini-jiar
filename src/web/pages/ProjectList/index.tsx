@@ -2,10 +2,10 @@ import { getApiUrl } from '@web/lib';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { List } from './List';
 import SearchPanel from './SearchPanel';
-import { isEmpty, omitEmptyObjectValue, stringifyParams } from 'core';
+import { isEmpty, omitEmptyObjectValue, XUserInfoAttr, XProjectAttr } from '@kite/jira-server';
+import { stringifyParams } from 'core';
 import { useMount } from 'hooks';
 
-import type { XUserInfoAttr, XProjectAttr } from 'types';
 import type { XSearchProjectListType } from './index.type';
 
 const api = getApiUrl();
