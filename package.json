@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.ts",
   "scripts": {
+    "install": "npx msw init public/ --save",
     "client:dev": "scripty",
     "client:analyze": "scripty",
     "client:build": "scripty",
