@@ -1,0 +1,12 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+      "rootDir": "./src",
+      "baseUrl": "./",
+      "outDir": "./bin",
+      "declaration": true,
+      "declarationDir": "./typings",
+      "noEmit": false,
+  },
+  "include": ["./src", "./tests"],
+}

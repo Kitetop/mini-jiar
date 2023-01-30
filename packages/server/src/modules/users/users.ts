@@ -1,4 +1,4 @@
-import { isEmpty } from '../function';
+import { isEmpty } from '@kite/utils';
 import { rest } from 'msw';
 import { XUserInfoAttr } from '../index.type';
 import { getUserModle } from './model';

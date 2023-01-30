@@ -1,8 +1,6 @@
 const { join, resolve } = require('path');
 const FriendlyErrorsWebpackPlugin = require('@soda/friendly-errors-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const logo = join(__dirname, 'icon.png');
-// const WebpackBuildNotifierPlugin = require('webpack-build-notifier');
 const notifier = require('node-notifier');
 const webpack = require('webpack');
 
@@ -28,11 +26,6 @@ module.exports = {
   stats: 'errors-only',
   devtool: false,
   plugins: [
-    // new WebpackBuildNotifierPlugin({
-    //   title: '💿 京程一灯React脚手架',
-    //   logo,
-    //   suppressSuccess: true,
-    // }),
     new HtmlWebpackPlugin({
       title: 'react-generator',
       filename: 'index.html',

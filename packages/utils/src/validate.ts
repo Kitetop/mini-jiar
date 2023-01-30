@@ -1,3 +1,6 @@
+/**
+ * 主要包含数据类型判断、处理的方法
+ */
 import { isEmpty as _isEmpty, isNil, isObject, isString, omitBy, cloneDeep } from 'lodash-es';
 
 /**

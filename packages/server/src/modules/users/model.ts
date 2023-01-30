@@ -1,4 +1,4 @@
-import { isEmpty } from '../function';
+import { isEmpty } from '@kite/utils';
 import { XUserInfoAttr } from '../index.type';
 import { AbstractCrud, IAbstractModel } from '../crud';
 

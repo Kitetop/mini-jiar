@@ -8,8 +8,8 @@
     "client:dev": "scripty",
     "client:analyze": "scripty",
     "client:build": "scripty",
-    "mock-server": "json-server .mock/db.json --watch --middlewares .mock/middleware.js",
-    "test": "jest"
+    "test": "jest",
+    "prepare": "husky install"
   },
   "author": "Kitetop",
   "license": "ISC",
@@ -19,7 +19,8 @@
     "qs": "^6.11.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.3.0"
+    "react-router-dom": "^6.3.0",
+    "@kite/utils": "workspace:*"
   },
   "devDependencies": {
     "@babel/core": "^7.18.6",
@@ -41,7 +42,6 @@
     "@typescript-eslint/eslint-plugin": "^5.30.0",
     "@typescript-eslint/parser": "^5.30.0",
     "@types/qs": "^6.9.7",
-    "@welldone-software/why-did-you-render": "^7.0.1",
     "@kite/jira-server": "workspace:*",
     "babel-jest": "^29.0.3",
     "babel-loader": "^8.2.5",
@@ -66,7 +66,7 @@
     "scripty": "^2.1.0",
     "swc-loader": "^0.2.3",
     "ts-jest": "^29.0.1",
-    "typescript": "^4.7.4",
+    "typescript": "4.7.4",
     "webpack": "^5.73.0",
     "webpack-bundle-analyzer": "^4.5.0",
     "webpack-cli": "^4.10.0",

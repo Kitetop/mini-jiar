@@ -2,7 +2,8 @@ import { getApiUrl } from '@web/lib';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { List } from './List';
 import SearchPanel from './SearchPanel';
-import { isEmpty, omitEmptyObjectValue, XUserInfoAttr, XProjectAttr } from '@kite/jira-server';
+import { XUserInfoAttr, XProjectAttr } from '@kite/jira-server';
+import { isEmpty, omitEmptyObjectValue } from '@kite/utils';
 import { stringifyParams } from 'core';
 import { useMount } from 'hooks';
 

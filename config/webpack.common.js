@@ -61,7 +61,6 @@ module.exports = {
     // },
   },
   plugins: [
-    // new NodePolyfillPlugin(),
     new MiniCssExtractPlugin({
       filename: _modeflag ? 'styles/[name].[contenthash:5].css' : 'styles/[name].css',
       chunkFilename: _modeflag ? 'styles/[name].[contenthash:5].css' : 'styles/[name].css',
