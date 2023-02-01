@@ -21,11 +21,9 @@ module.exports = merge.default(webpackBaseConfig, _mergeConfig, {
     // fallback: { url: false, os: false },
     mainFiles: ['index'],
     alias: {
-      'core': resolve('src/core'),
-      'server': resolve('src/server'),
+      'context': resolve('src/context'),
       'hooks': resolve('src/hooks'),
-      '@web': resolve('src/web'),
-      '@pages': resolve('src/web/pages'),
+      'web': resolve('src/web'),
     },
 
     extensions: ['.js', '.ts', '.tsx', 'jsx', '.css'],

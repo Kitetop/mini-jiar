@@ -1,7 +1,7 @@
 import { useDebounceFn } from 'hooks';
 import { memo, useState } from 'react';
 
-import type { XUserInfoAttr } from 'types';
+import type { XUserInfoAttr } from '@kite/jira-server';
 import type { XSearchProjectListType } from './index.type';
 
 interface ISearchPanelPropsType {

@@ -1,12 +1,24 @@
-import { useState } from 'react';
-import { ProjectList } from './ProjectList';
-import { Login } from './Login';
+import { useContext, useEffect, useState } from 'react';
+import { ProjectList } from './projects';
+import { Login } from './login';
+import { AuthContext } from 'context/auth-context';
 
 const App = (): JSX.Element => {
+  const context = useContext(AuthContext);
   const [count, setCount] = useState(0);
+  useEffect(() => {
+    const t = setInterval(() => {
+      setCount(v => v + 1);
+    }, 5000);
+
+    return () => {
+      clearInterval(t);
+    };
+  }, []);
   return (
     <>
-      <div className="container">This is React App; {count}</div>
+      <div className="container">This is React App; {count} </div>
+      {context ? <div className="container">用户名: {context.user?.username}</div> : undefined}
       <button
         onClick={() =>
           setCount(v => {

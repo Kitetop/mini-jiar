@@ -1,18 +1,10 @@
 import { FormEvent } from 'react';
 
-import type { XUserInfoAttr } from '@kite/jira-server';
-
-function login(params: Omit<XUserInfoAttr, 'id'>) {
-  return fetch('login', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(params)
-  });
-}
+import { useAuth } from 'hooks/auth';
 
 export const Login = () => {
+  const authContext = useAuth();
+
   /**
    * 提交事件
    * @param event
@@ -21,11 +13,7 @@ export const Login = () => {
     event.preventDefault();
     const username = (event.currentTarget.elements[0] as HTMLInputElement).value;
     const password = (event.currentTarget.elements[1] as HTMLInputElement).value;
-    login({ username, password }).then(async res => {
-      if (res.ok) {
-        // console.log(await res.json());
-      }
-    });
+    authContext.login({ username, password });
   };
 
   return (

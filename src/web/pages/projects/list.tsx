@@ -1,4 +1,4 @@
-import type { XUserInfoAttr, XProjectAttr } from 'types';
+import type { XUserInfoAttr, XProjectAttr } from '@kite/jira-server';
 
 interface IListPropsType {
   users: XUserInfoAttr[];

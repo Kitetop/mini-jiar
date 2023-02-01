@@ -21,7 +21,7 @@ export function login() {
       );
     }
 
-    return res(ctx.status(200), ctx.json({ token }));
+    return res(ctx.status(200), ctx.json({ token, username }));
   });
 }
 

@@ -1,6 +1,6 @@
 import { debounce } from 'lodash-es';
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { useUnMount } from './lifeCycle';
+import { useUnMount } from './life-cycle';
 import type { IDebounceOptions, noop } from './index.type';
 
 export function useDebounceFn<T extends noop<Parameters<T>>>(

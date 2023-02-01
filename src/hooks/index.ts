@@ -1,2 +1,2 @@
 export * from './debounce';
-export * from './lifeCycle';
+export * from './life-cycle';

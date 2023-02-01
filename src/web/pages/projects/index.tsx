@@ -1,10 +1,10 @@
-import { getApiUrl } from '@web/lib';
+import { getApiUrl } from 'web/lib';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { List } from './List';
-import SearchPanel from './SearchPanel';
+import { List } from './list';
+import SearchPanel from './search-panel';
 import { XUserInfoAttr, XProjectAttr } from '@kite/jira-server';
 import { isEmpty, omitEmptyObjectValue } from '@kite/utils';
-import { stringifyParams } from 'core';
+import { stringifyParams } from '../../lib';
 import { useMount } from 'hooks';
 
 import type { XSearchProjectListType } from './index.type';
