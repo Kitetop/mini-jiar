@@ -11,3 +11,7 @@ export interface XUserInfoAttr {
   id: string;
   token?: string;
 }
+
+export interface XBaseResponseWithMsg {
+  message: string;
+}

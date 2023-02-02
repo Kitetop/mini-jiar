@@ -26,6 +26,7 @@ module.exports = merge.default(webpackBaseConfig, _mergeConfig, {
       'pages': resolve('src/pages'),
       'components': resolve('src/components'),
       'lib': resolve('src/lib'),
+      'api': resolve('src/api'),
     },
 
     extensions: ['.js', '.ts', '.tsx', 'jsx', '.css'],

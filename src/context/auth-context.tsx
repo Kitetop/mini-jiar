@@ -1,14 +1,15 @@
 import { createContext, useState } from 'react';
+import { loginApi, registerApi } from 'api/auth';
 
 import type { XUserInfoAttr } from '@kite/jira-server';
 import type { ReactNode } from 'react';
+import type { ILoginUser } from 'api/auth';
 
-// 可供系统直接读取的用户属性
-type ILoginUser = Omit<XUserInfoAttr, 'id' | 'password'>;
-// AuthContext提供给下层主见的value类型
+// AuthContext提供给下层组件的value类型
 export interface IAuthContextValue {
   user: ILoginUser | null;
   login: (userInfo: Omit<XUserInfoAttr, 'id'>) => Promise<void>;
+  register: (registerInfo: Omit<XUserInfoAttr, 'id'>) => Promise<void>;
   logout: () => void;
 }
 
@@ -25,20 +26,24 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
    * @returns
    */
   const login = (userInfo: Omit<XUserInfoAttr, 'id'>) => {
-    return fetch('login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(userInfo)
-    }).then(async response => {
-      if (response.ok) {
-        const user = (await response.json()) as ILoginUser;
-        // TODO: some operation with token
-        return setLoginUser(user);
-      }
-      return Promise.reject(userInfo);
-    });
+    return loginApi(userInfo)
+      .then(user => {
+        setLoginUser(user);
+      })
+      .catch(({ message = '' }) => {
+        message && alert(message);
+      });
+  };
+
+  /**
+   * 用户注册接口
+   * @param registerInfo
+   * @returns
+   */
+  const register = (registerInfo: Omit<XUserInfoAttr, 'id'>) => {
+    return registerApi(registerInfo)
+      .then(({ message }) => alert(message))
+      .catch(({ message }) => alert(message));
   };
 
   /**
@@ -53,6 +58,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       value={{
         user: loginUser,
         login,
+        register,
         logout
       }}
     >
