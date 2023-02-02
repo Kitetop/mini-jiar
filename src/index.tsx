@@ -1,5 +1,5 @@
 import React from 'react';
-import App from 'web/pages/App';
+import App from 'pages/App';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import { worker } from '@kite/jira-server';

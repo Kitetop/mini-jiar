@@ -11,7 +11,7 @@ if (argv.analyze) webpackBaseConfig.plugins.concat([new BundleAnalyzerPlugin()])
 
 module.exports = merge.default(webpackBaseConfig, _mergeConfig, {
   entry: {
-    main: resolve('src/web/index.tsx'),
+    main: resolve('src/index.tsx'),
   },
   output: {
     path: resolve('dist'),
@@ -23,7 +23,9 @@ module.exports = merge.default(webpackBaseConfig, _mergeConfig, {
     alias: {
       'context': resolve('src/context'),
       'hooks': resolve('src/hooks'),
-      'web': resolve('src/web'),
+      'pages': resolve('src/pages'),
+      'components': resolve('src/components'),
+      'lib': resolve('src/lib'),
     },
 
     extensions: ['.js', '.ts', '.tsx', 'jsx', '.css'],

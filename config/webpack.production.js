@@ -26,7 +26,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: 'react-generator',
       filename: 'index.html',
-      template: resolve(__dirname, '../src/web/index.html'),
+      template: resolve(__dirname, '../public/index.html'),
     }),
   ],
 };

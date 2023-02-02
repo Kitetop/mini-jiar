@@ -1,6 +1,6 @@
 import { FormEvent } from 'react';
 
-import { useAuth } from 'hooks/auth';
+import { useAuth } from 'hooks/custom-context';
 
 export const Login = () => {
   const authContext = useAuth();

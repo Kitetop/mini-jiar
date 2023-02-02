@@ -1,4 +1,4 @@
-import { getApiUrl } from 'web/lib';
+import { getApiUrl } from 'lib';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { List } from './list';
 import SearchPanel from './search-panel';
