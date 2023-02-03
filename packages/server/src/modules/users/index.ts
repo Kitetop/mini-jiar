@@ -1,3 +1,3 @@
-import { login, register } from './users';
+import { login, register, getUserList } from './users';
 
-export const userHandlers = [login(), register()];
+export const userHandlers = [login(), register(), getUserList()];

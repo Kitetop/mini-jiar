@@ -3,13 +3,7 @@
  */
 import { isEmpty as _isEmpty, isNil, isObject, isString, omitBy, cloneDeep } from 'lodash-es';
 
-/**
- * 排除callback返回值为true的值
- * @param value
- * @param callback
- * @returns
- */
-export function omitEmptyObjectValue(
+export function omitObjectValueByFunc(
   value: object,
   callback: (value: unknown, key?: string) => boolean
 ) {
@@ -27,6 +21,16 @@ export function isEmpty(value: unknown) {
   if (isObject(value)) return _isEmpty(value);
 
   return isNil(value);
+}
+
+/**
+ * 排除callback返回值为true的值
+ * @param value
+ * @param callback
+ * @returns
+ */
+export function omitEmptyObjectValue(value: object) {
+  return omitObjectValueByFunc(value, v => isEmpty(v));
 }
 
 export { cloneDeep, isString, isObject };

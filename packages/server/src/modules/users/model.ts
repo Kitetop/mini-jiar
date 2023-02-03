@@ -7,7 +7,7 @@ export const users: XUserInfoAttr[] = [
   { username: 'Null', password: '2', id: '10001' }
 ];
 
-class UserModle extends AbstractCrud<IAbstractModel<Partial<XUserInfoAttr>>> {
+class UserModle extends AbstractCrud<IAbstractModel<XUserInfoAttr>> {
   protected static instance: UserModle;
 
   protected constructor(model: XUserInfoAttr[], primary?: string) {

@@ -1,4 +1,4 @@
-export interface XSearchProjectListType {
+export interface ISearchProjectListType {
   userId: string;
   projectName: string;
 }

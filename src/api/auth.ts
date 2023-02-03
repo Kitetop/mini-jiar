@@ -1,4 +1,4 @@
-import { http, REQUEST_METHODS } from 'lib';
+import { http, IRequestOptions, REQUEST_METHODS } from 'lib';
 
 import type { XBaseResponseWithMsg, XUserInfoAttr } from '@kite/jira-server';
 
@@ -26,4 +26,14 @@ export async function registerApi(data: Omit<XUserInfoAttr, 'id'>) {
     method: REQUEST_METHODS.POST,
     data
   });
+}
+
+/**
+ * 获得用户列表
+ * @param data
+ * @param extralOptions
+ * @returns
+ */
+export async function getUserListApi(extralOptions: IRequestOptions) {
+  return http<XUserInfoAttr[]>('user/list', extralOptions);
 }

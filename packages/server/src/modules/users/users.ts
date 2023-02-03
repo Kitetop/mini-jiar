@@ -1,7 +1,8 @@
 import { isEmpty } from '@kite/utils';
 import { rest } from 'msw';
-import { XUserInfoAttr } from '../index.type';
 import { getUserModle } from './model';
+
+import type { XUserInfoAttr } from '../index.type';
 
 /**
  * 用户登陆接口
@@ -44,5 +45,15 @@ export function register() {
         message: '该用户已经存在，请直接登录'
       })
     );
+  });
+}
+
+/**
+ * 查找用户列表接口
+ * @returns
+ */
+export function getUserList() {
+  return rest.get('user/list', async (req, res, ctx) => {
+    return res(ctx.status(200), ctx.json(getUserModle().findAll()));
   });
 }

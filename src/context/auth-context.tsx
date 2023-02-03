@@ -1,9 +1,9 @@
 import { createContext, useState } from 'react';
-import { loginApi, registerApi } from 'api/auth';
+import { loginApi, registerApi } from 'api';
 
-import type { XUserInfoAttr } from '@kite/jira-server';
 import type { ReactNode } from 'react';
-import type { ILoginUser } from 'api/auth';
+import type { XUserInfoAttr } from '@kite/jira-server';
+import type { ILoginUser } from 'api';
 
 // AuthContext提供给下层组件的value类型
 export interface IAuthContextValue {
@@ -27,9 +27,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
    */
   const login = (userInfo: Omit<XUserInfoAttr, 'id'>) => {
     return loginApi(userInfo)
-      .then(user => {
-        setLoginUser(user);
-      })
+      .then(setLoginUser)
       .catch(({ message = '' }) => {
         message && alert(message);
       });

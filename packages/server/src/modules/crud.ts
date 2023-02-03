@@ -1,4 +1,4 @@
-export type IAbstractModel<T> = { [K in keyof T]: T[K] };
+export type IAbstractModel<T> = { [K in keyof T]?: T[K] };
 
 export class AbstractCrud<T extends { [key: string | number]: unknown }> {
   protected model: T[];

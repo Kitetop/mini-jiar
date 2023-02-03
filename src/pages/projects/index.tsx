@@ -1,84 +1,43 @@
-import { getApiUrl } from 'lib';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useState } from 'react';
+import { XUserInfoAttr, XProjectAttr } from '@kite/jira-server';
+import { omitEmptyObjectValue } from '@kite/utils';
+import { useMount, useClientWithAuth } from 'hooks';
+import { getUserListApi, getProjectListApi } from 'api';
 import { List } from './list';
 import SearchPanel from './search-panel';
-import { XUserInfoAttr, XProjectAttr } from '@kite/jira-server';
-import { isEmpty, omitEmptyObjectValue } from '@kite/utils';
-import { stringifyParams } from '../../lib';
-import { useMount } from 'hooks';
 
-import type { XSearchProjectListType } from './index.type';
-
-const api = getApiUrl();
-
-/**
- * 获得请求参数
- * @param params
- * @returns
- */
-function getSearchProjectParams(params: XSearchProjectListType) {
-  return stringifyParams(
-    omitEmptyObjectValue(
-      {
-        projectName: params.projectName,
-        belongPerson: params.userId
-      },
-      value => isEmpty(value)
-    )
-  );
-}
-
-/**
- * 根据条件查询符合条件的 projectList
- * @param v
- * @returns
- */
-function requestProjectLists(v: XSearchProjectListType) {
-  return fetch(`${api}/projects?${getSearchProjectParams(v)}`);
-}
+import type { ISearchProjectListType } from './index.type';
 
 export const ProjectList = () => {
-  const searchQuery = useRef<XSearchProjectListType>({
-    userId: '',
-    projectName: ''
-  });
-
   const [projectList, setProjectList] = useState<XProjectAttr[]>([]);
 
   const [userList, setUserList] = useState<XUserInfoAttr[]>([]);
 
+  const projectListClient = useClientWithAuth(getProjectListApi);
+  const userListClient = useClientWithAuth(getUserListApi);
+
   /**
    * 变更查找值的函数
    */
-  const changeSearchQuery = useCallback((v: XSearchProjectListType) => {
-    requestProjectLists(v).then(async response => {
-      if (response.ok) {
-        setProjectList(await response.json());
-      }
-    });
-  }, []);
+  const changeSearchQuery = useCallback(
+    (v: ISearchProjectListType) => {
+      projectListClient(
+        omitEmptyObjectValue({
+          projectName: v.projectName,
+          belongPerson: v.userId
+        }) as ISearchProjectListType
+      ).then(setProjectList);
+    },
+    [projectListClient]
+  );
 
   /**
    * 请求项目列表
    */
   useMount(() => {
-    requestProjectLists(searchQuery.current).then(async response => {
-      if (response.ok) {
-        setProjectList(await response.json());
-      }
-    });
+    userListClient().then(setUserList);
+    projectListClient(null).then(setProjectList);
   });
-
-  /**
-   * 请求用户列表
-   */
-  useEffect(() => {
-    fetch(`${api}/users?`).then(async response => {
-      if (response.ok) {
-        setUserList(await response.json());
-      }
-    });
-  }, []);
 
   return (
     <>

@@ -1,3 +1,3 @@
-import { userHandlers } from './modules';
+import { userHandlers, projectHandlers } from './modules';
 
-export const handlers = [...userHandlers];
+export const handlers = [...userHandlers, ...projectHandlers];

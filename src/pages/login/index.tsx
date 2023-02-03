@@ -1,5 +1,4 @@
 import { useRef } from 'react';
-
 import { useAuth } from 'hooks/custom-context';
 
 export const Login = () => {

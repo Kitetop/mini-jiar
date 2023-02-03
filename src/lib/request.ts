@@ -1,8 +1,9 @@
 import qs from 'qs';
 
-interface IRequestOptions extends RequestInit {
+export type IRequestOptionsData = Record<string | number, unknown>;
+export interface IRequestOptions<T = IRequestOptionsData> extends RequestInit {
   token?: string;
-  data?: Record<string | number, unknown>;
+  data?: T;
 }
 
 export enum REQUEST_METHODS {
@@ -20,7 +21,10 @@ export function stringifyParams<T = { [K: string]: unknown }>(params: T) {
  * @param param
  * @returns
  */
-export async function http<T>(url: string, { token, data, ...other }: IRequestOptions): Promise<T> {
+export async function http<T, P = IRequestOptionsData>(
+  url: string,
+  { token, data, ...other }: IRequestOptions<P>
+): Promise<T> {
   const baseConfig = {
     method: REQUEST_METHODS.GET,
     headers: {
@@ -31,7 +35,7 @@ export async function http<T>(url: string, { token, data, ...other }: IRequestOp
   };
 
   if (baseConfig.method.toUpperCase() === REQUEST_METHODS.GET) {
-    url += `?${stringifyParams(data)}`;
+    url += data ? `?${stringifyParams(data)}` : '';
   } else {
     baseConfig.body = JSON.stringify(data || {});
   }
