@@ -2,15 +2,15 @@ import { useDebounceFn } from 'hooks';
 import { memo, useState } from 'react';
 
 import type { XUserInfoAttr } from '@kite/jira-server';
-import type { XSearchProjectListType } from './index.type';
+import type { ISearchProjectListType } from './index.type';
 
 interface ISearchPanelPropsType {
   users: XUserInfoAttr[];
-  changeSearchQuery: (v: XSearchProjectListType) => void;
+  changeSearchQuery: (v: ISearchProjectListType) => void;
 }
 
 const SearchPanel = ({ users, changeSearchQuery }: ISearchPanelPropsType) => {
-  const [searchQuery, updateSearchQuery] = useState<XSearchProjectListType>({
+  const [searchQuery, updateSearchQuery] = useState<ISearchProjectListType>({
     userId: '',
     projectName: ''
   });

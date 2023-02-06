@@ -1,9 +1,7 @@
-import { createContext, useState } from 'react';
-import { loginApi, registerApi } from 'api';
+import { createContext, useState, type ReactNode } from 'react';
+import { loginApi, registerApi, type ILoginUser } from 'api';
 
-import type { ReactNode } from 'react';
 import type { XUserInfoAttr } from '@kite/jira-server';
-import type { ILoginUser } from 'api';
 
 // AuthContext提供给下层组件的value类型
 export interface IAuthContextValue {

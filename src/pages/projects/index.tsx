@@ -1,5 +1,4 @@
 import { useCallback, useState } from 'react';
-import { XUserInfoAttr, XProjectAttr } from '@kite/jira-server';
 import { omitEmptyObjectValue } from '@kite/utils';
 import { useMount, useClientWithAuth } from 'hooks';
 import { getUserListApi, getProjectListApi } from 'api';
@@ -7,6 +6,7 @@ import { List } from './list';
 import SearchPanel from './search-panel';
 
 import type { ISearchProjectListType } from './index.type';
+import type { XUserInfoAttr, XProjectAttr } from '@kite/jira-server';
 
 export const ProjectList = () => {
   const [projectList, setProjectList] = useState<XProjectAttr[]>([]);

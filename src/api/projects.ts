@@ -1,7 +1,6 @@
-import { http } from 'lib';
+import { http, type IRequestOptions } from 'lib';
 
 import type { XProjectAttr } from '@kite/jira-server';
-import type { IRequestOptions } from 'lib';
 import type { ISearchProjectListType } from 'pages/projects/index.type';
 
 /*
