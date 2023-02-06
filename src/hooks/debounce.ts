@@ -1,12 +1,9 @@
 import { debounce } from 'lodash-es';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useUnMount } from './life-cycle';
-import type { IDebounceOptions, noop } from './index.type';
+import type { IDebounceOptions, INoopFun } from './index.type';
 
-export function useDebounceFn<T extends noop<Parameters<T>>>(
-  fn: T,
-  options: IDebounceOptions = {}
-) {
+export function useDebounceFn<T extends INoopFun<T>>(fn: T, options: IDebounceOptions = {}) {
   // 缓存一下fn
   const fnRef = useRef(fn);
 

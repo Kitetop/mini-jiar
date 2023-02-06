@@ -1,5 +1,6 @@
 import { createContext, useState, type ReactNode } from 'react';
-import { loginApi, registerApi, type ILoginUser } from 'api';
+import { getUserInfoByTokenApi, loginApi, registerApi, type ILoginUser } from 'api';
+import { useLocalStorageState, useMount } from 'hooks';
 
 import type { XUserInfoAttr } from '@kite/jira-server';
 
@@ -11,12 +12,16 @@ export interface IAuthContextValue {
   logout: () => void;
 }
 
+export const AUTH_KEY = 'JIAR_TOKEN';
+
 export const AuthContext = createContext<IAuthContextValue | null>(null);
 AuthContext.displayName = 'AuthContext';
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   // 系统全局的用户信息
   const [loginUser, setLoginUser] = useState<ILoginUser | null>(null);
+
+  const [token, updateUserToken] = useLocalStorageState<string | undefined>(AUTH_KEY);
 
   /**
    * 用户登陆接口
@@ -25,7 +30,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
    */
   const login = (userInfo: Omit<XUserInfoAttr, 'id'>) => {
     return loginApi(userInfo)
-      .then(setLoginUser)
+      .then(user => {
+        updateUserToken(user.token);
+        setLoginUser(user);
+      })
       .catch(({ message = '' }) => {
         message && alert(message);
       });
@@ -48,6 +56,15 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const logout = () => {
     setLoginUser(null);
   };
+
+  /**
+   * Mount的时候如果有token那么要用token信息去取得最新的用户信息
+   */
+  useMount(() => {
+    if (token) {
+      getUserInfoByTokenApi(token).then(setLoginUser);
+    }
+  });
 
   return (
     <AuthContext.Provider

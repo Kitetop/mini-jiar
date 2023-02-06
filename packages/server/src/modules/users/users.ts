@@ -57,3 +57,15 @@ export function getUserList() {
     return res(ctx.status(200), ctx.json(getUserModle().findAll()));
   });
 }
+
+/**
+ * 根据token查找用户
+ * @returns
+ */
+export function getUserInfoByToken() {
+  return rest.post('user/info', async (req, res, ctx) => {
+    const { token } = await req.json();
+    const userModle = getUserModle();
+    return res(ctx.status(200), ctx.json(userModle.findUserByToken(token)));
+  });
+}

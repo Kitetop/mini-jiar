@@ -1,4 +1,4 @@
-export type noop<T extends unknown[]> = (...args: T) => unknown;
+export type INoopFun<T extends () => unknown> = (...args: Parameters<T>) => ReturnType<T>;
 
 export interface IDebounceOptions {
   wait?: number;

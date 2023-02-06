@@ -35,6 +35,17 @@ class UserModle extends AbstractCrud<IAbstractModel<XUserInfoAttr>> {
     return null;
   }
 
+  public findUserByToken(token: string) {
+    const [username, password] = token.split('_');
+    const [user] = this.searchUser({ username, password }) || [];
+    if (user)
+      return {
+        id: user.id,
+        username: user.username
+      };
+    return null;
+  }
+
   /**
    * 根据用户名和密码查找指定信息
    * @param username

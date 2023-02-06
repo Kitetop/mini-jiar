@@ -1,7 +1,16 @@
 /**
  * 主要包含数据类型判断、处理的方法
  */
-import { isEmpty as _isEmpty, isNil, isObject, isString, omitBy, cloneDeep } from 'lodash-es';
+import {
+  isEmpty as _isEmpty,
+  isNil,
+  isUndefined,
+  isObject,
+  isString,
+  omitBy,
+  cloneDeep,
+  isFunction
+} from 'lodash-es';
 
 export function omitObjectValueByFunc(
   value: object,
@@ -33,4 +42,4 @@ export function omitEmptyObjectValue(value: object) {
   return omitObjectValueByFunc(value, v => isEmpty(v));
 }
 
-export { cloneDeep, isString, isObject };
+export { cloneDeep, isString, isUndefined, isNil, isObject, isFunction };
