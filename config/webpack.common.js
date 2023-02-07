@@ -32,12 +32,31 @@ module.exports = {
         type: 'asset/resource',
       },
       {
-        test: /\.css$/i,
-        include: [resolve(__dirname, 'src'), resolve(__dirname, 'node_modules')],
+        test: /\.(css|less)$/i,
+        include: [resolve(__dirname, '../src'), resolve(__dirname, '../node_modules')],
         use: [
           MiniCssExtractPlugin.loader,
           { loader: 'css-loader', options: { importLoaders: 1 } },
-          'postcss-loader',
+          {
+            // 给css属性自动添加前缀
+            loader: "postcss-loader",
+            options: {
+              postcssOptions: {
+                plugins: [["postcss-preset-env", {
+                    autoprefixer: {}
+                  }
+                ]]
+              },  
+            },
+          },
+          {
+            loader: 'less-loader',
+            options: {
+              lessOptions: {
+                javascriptEnabled: true,
+              }
+            }
+          },
         ],
       },
       {
