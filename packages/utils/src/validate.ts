@@ -8,8 +8,9 @@ import {
   isObject,
   isString,
   omitBy,
-  cloneDeep,
-  isFunction
+  isFunction,
+  isArray,
+  inRange
 } from 'lodash-es';
 
 export function omitObjectValueByFunc(
@@ -42,4 +43,4 @@ export function omitEmptyObjectValue(value: object) {
   return omitObjectValueByFunc(value, v => isEmpty(v));
 }
 
-export { cloneDeep, isString, isUndefined, isNil, isObject, isFunction };
+export { isString, isUndefined, isNil, isObject, isFunction, isArray, inRange };

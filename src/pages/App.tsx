@@ -1,34 +1,20 @@
-import { useContext, useEffect, useState } from 'react';
-import { ProjectList } from './projects';
+// import { ProjectList } from './projects';
+import { HTapeLayout } from 'components';
 import { Login } from './login';
-import { AuthContext } from 'context/auth-context';
 
 const App = (): JSX.Element => {
-  const context = useContext(AuthContext);
-  const [count, setCount] = useState(0);
-  useEffect(() => {
-    const t = setInterval(() => {
-      setCount(v => v + 1);
-    }, 5000);
-
-    return () => {
-      clearInterval(t);
-    };
-  }, []);
   return (
     <>
-      <div className="container">This is React App; {count} </div>
-      {context ? <div className="container">用户名: {context.user?.username}</div> : undefined}
-      <button
-        onClick={() =>
-          setCount(v => {
-            return v + 1;
-          })
-        }
+      <HTapeLayout
+        style={{ backgroundColor: 'grey' }}
+        itemsSize={[200, '300', 'auto']}
+        height={200}
       >
-        加一
-      </button>
-      <ProjectList />
+        <div style={{ backgroundColor: 'red' }}>hhhh1</div>
+        <div style={{ backgroundColor: 'blue', width: 200 }}>hhhh2</div>
+        <div style={{ backgroundColor: 'yellow' }}>hhhh3</div>
+      </HTapeLayout>
+      {/* <ProjectList /> */}
       <Login />
     </>
   );
