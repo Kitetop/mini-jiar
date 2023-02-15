@@ -1,9 +1,14 @@
-import { Children, ReactElement, cloneElement, type CSSProperties } from 'react';
+import {
+  Children,
+  ReactElement,
+  cloneElement,
+  type CSSProperties,
+  type PropsWithChildren
+} from 'react';
 import { inRange, merge } from '@kite/utils';
-export type IReactChildrenType = (ReactElement | ReactElement[]) & { length?: number };
+export type IReactChildrenType = ReactElement[] | ReactElement;
 
-export interface IAbstractLayoutPropsAttr {
-  children: IReactChildrenType;
+export interface IAbstractLayoutPropsAttr extends PropsWithChildren {
   style?: CSSProperties;
   className?: string;
   height?: string | number;
@@ -12,7 +17,7 @@ export interface IAbstractLayoutPropsAttr {
 
 export const AbstractLayout = () => <></>;
 
-AbstractLayout.setStyles = (props: ReactElement['props'], style: CSSProperties) => {
+AbstractLayout.getMergePropsStyles = (props: ReactElement['props'], style: CSSProperties) => {
   return merge(props, { style });
 };
 
@@ -58,7 +63,9 @@ AbstractLayout.calculateItemsInset = (itmesSize: (string | number)[]) => {
       // 只有itemsSize设置有效的数字、数字字符串时才会添加width属性
       ...(~~itmesSize[index] && { width: ~~itmesSize[index] }),
       // 只有位于auto左边的items才需要设置left属性
-      ...(dealWithItemsSize._auto >= index && { left: ~~dealWithItemsSize[index - 1] }),
+      ...((dealWithItemsSize._auto >= index || dealWithItemsSize._auto === -1) && {
+        left: ~~dealWithItemsSize[index - 1]
+      }),
       // 只有当auto大于0小于等于index时才需要设置right属性
       ...(inRange(dealWithItemsSize._auto, 0, index + 1) && {
         right: ~~(dealWithItemsSize[len] - dealWithItemsSize[index])

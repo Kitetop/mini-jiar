@@ -1,2 +1,2 @@
-export * from './validate';
-export * from './deal-data';
+export * from './lodash';
+export * from './function';

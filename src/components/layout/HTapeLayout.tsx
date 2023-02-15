@@ -1,8 +1,14 @@
-import { AbstractLayout, type IAbstractLayoutPropsAttr } from './AbstractLayout';
+import { isEmpty, isArray } from '@kite/utils';
+import {
+  AbstractLayout,
+  type IReactChildrenType,
+  type IAbstractLayoutPropsAttr
+} from './AbstractLayout';
 
 export interface IHTapeLayoptPropsAttr extends IAbstractLayoutPropsAttr {
   itemsSize?: (string | number)[];
   height: string | number;
+  children?: IReactChildrenType;
 }
 /**
  * 水平布局，支持设置itemsSize来决定特定items自动撑满剩余空间
@@ -20,32 +26,38 @@ export interface IHTapeLayoptPropsAttr extends IAbstractLayoutPropsAttr {
  */
 export const HTapeLayout = ({
   children,
-  itemsSize = ['auto'],
+  itemsSize = [],
   height,
   className,
   style
 }: IHTapeLayoptPropsAttr) => {
-  const { calculateItemsInset, wrapperChildren, setStyles } = AbstractLayout;
-
-  /**
-   * 简单的处理一下itemsSize与children的对应关系
-   */
-  if (itemsSize.length !== (children?.length || 1)) {
-    throw new Error(
-      `期待的itemsSize长度: ${children?.length || 1}, 实际itemsSize的长度: ${
-        itemsSize.length
-      }, 请给组件设置正确itemsSize属性`
-    );
-  }
+  const { calculateItemsInset, wrapperChildren, getMergePropsStyles } = AbstractLayout;
 
   /**
    * 得到经过wrapper的子元素
    * @returns
    */
   const getWrapperChildren = (items: (string | number)[]) => {
+    // 确定一下children的个数，不设置时取0
+    const length = isArray(children) ? children.length : ~~!isEmpty(children);
+
+    /**
+     * 简单的处理一下itemsSize与children的对应关系
+     */
+    if (length > 1 && itemsSize.length !== length) {
+      throw new Error(`请给组件设置正确itemsSize属性, 期待的itemsSize长度为: ${length}`);
+    }
     const dealWithItemsFunc = calculateItemsInset(items);
-    return wrapperChildren(children, (props, index) =>
-      setStyles(props, { ...dealWithItemsFunc(index), position: 'absolute', top: 0, bottom: 0 })
+    return (
+      children &&
+      wrapperChildren(children, (props, index) =>
+        getMergePropsStyles(props, {
+          ...dealWithItemsFunc(index),
+          position: 'absolute',
+          top: 0,
+          bottom: 0
+        })
+      )
     );
   };
 
