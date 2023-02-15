@@ -31,7 +31,7 @@ export const HTapeLayout = ({
   className,
   style
 }: IHTapeLayoptPropsAttr) => {
-  const { calculateItemsInset, wrapperChildren, getMergePropsStyles } = AbstractLayout;
+  const { calculateItemsInset, wrapperChildren, mergeStyle2Props } = AbstractLayout;
 
   /**
    * 得到经过wrapper的子元素
@@ -51,7 +51,7 @@ export const HTapeLayout = ({
     return (
       children &&
       wrapperChildren(children, (props, index) =>
-        getMergePropsStyles(props, {
+        mergeStyle2Props(props, {
           ...dealWithItemsFunc(index),
           position: 'absolute',
           top: 0,

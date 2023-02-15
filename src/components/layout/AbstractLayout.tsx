@@ -17,7 +17,7 @@ export interface IAbstractLayoutPropsAttr extends PropsWithChildren {
 
 export const AbstractLayout = () => <></>;
 
-AbstractLayout.getMergePropsStyles = (props: ReactElement['props'], style: CSSProperties) => {
+AbstractLayout.mergeStyle2Props = (props: ReactElement['props'], style: CSSProperties) => {
   return merge(props, { style });
 };
 
