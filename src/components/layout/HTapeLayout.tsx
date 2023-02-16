@@ -1,6 +1,6 @@
 import { isEmpty, isArray } from '@kite/utils';
 import {
-  AbstractLayout,
+  useAbstractLayout,
   type IReactChildrenType,
   type IAbstractLayoutPropsAttr
 } from './AbstractLayout';
@@ -31,7 +31,7 @@ export const HTapeLayout = ({
   className,
   style
 }: IHTapeLayoptPropsAttr) => {
-  const { calculateItemsInset, wrapperChildren, mergeStyle2Props } = AbstractLayout;
+  const { calculateItemsInset, wrapperChildren, mergeStyle2Props } = useAbstractLayout();
 
   /**
    * 得到经过wrapper的子元素
