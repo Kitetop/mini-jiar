@@ -1,5 +1,5 @@
 // import { ProjectList } from './projects';
-import { HTapeLayout } from 'components';
+import { HFlexTapeLayout, HTapeLayout } from 'components';
 import { Login } from './login';
 
 const App = (): JSX.Element => {

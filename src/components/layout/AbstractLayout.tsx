@@ -70,6 +70,7 @@ export function useAbstractLayout<T extends ReactElement['props']>() {
     /** 缓存先前的计算结果，提高执行效率 */
     return (index: number) => {
       return {
+        auto: dealWithItemsSize._auto,
         // 只有itemsSize设置有效的数字、数字字符串时才会添加width属性
         ...(~~itmesSize[index] && { width: ~~itmesSize[index] }),
         // 只有位于auto左边的items才需要设置left属性
